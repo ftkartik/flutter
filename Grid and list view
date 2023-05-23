@@ -1,0 +1,49 @@
+import 'package:flutter/material.dart';
+
+class ListGrid1 extends StatefulWidget {
+  const ListGrid1({super.key});
+
+  @override
+  State<ListGrid1> createState() => _ListGrid1State();
+}
+
+class _ListGrid1State extends State<ListGrid1> {
+  List<String> fruits = ["orange", "apple", "banana", "Watermelon"];
+  Map fruitPerson = {
+    'fruits': ["orange", "apple", "banana", "Watermelon"],
+    'names': ["Kartik", "Balu", "Kabir", "Atharva"]
+  };
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('ListGrid1'),
+        backgroundColor: Colors.blueGrey,
+        elevation: 10,
+      ),
+      body: Container(
+            // ListView.builder(
+            //     itemCount: fruits.length,
+            //     itemBuilder: (context, index) {
+            //       return Card(
+            //         child: ListTile(
+            //           leading: const Icon(Icons.person),
+            //           title: Text(fruitPerson['fruits'][index]),
+            //           subtitle: Text(fruitPerson['names'][index]),
+            //         ),
+            //       );
+            //     }),
+            child: GridView.builder(
+                itemCount: fruits.length,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2),
+                itemBuilder: (context, index) {
+                  return GridTile(
+                      child: Card(
+                    child: Center(child: Text(fruitPerson['fruits'][index])),
+                  ));
+                })
+      ),
+    );
+  }
+}
