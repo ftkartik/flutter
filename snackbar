@@ -1,0 +1,60 @@
+import 'package:flutter/material.dart';
+
+class SnackbarWidget extends StatelessWidget {
+  const SnackbarWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Snackbar'),
+        backgroundColor: Colors.blueGrey,
+        elevation: 10,
+      ),
+      body: Center(
+        child: Container(
+          height: 58,
+          width: 180,
+          child: ElevatedButton(
+              style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(
+                      Color.fromARGB(255, 93, 91, 91)),
+                  overlayColor: MaterialStateProperty.all(Colors.blueGrey),
+                  padding: MaterialStateProperty.all(const EdgeInsets.all(8)),
+                  shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20)))),
+              onPressed: () {
+                final snackBar = SnackBar(
+                  action: SnackBarAction(label: "Undo", onPressed: () {}),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20)),
+                  behavior: SnackBarBehavior.floating,
+                  padding: const EdgeInsets.only(left: 20, right: 15),
+                  duration: const Duration(milliseconds: 5000),
+                  backgroundColor: Colors.white,
+                  content: const Text("You are now subscribed"),
+                );
+                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              },
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: const [
+                  Icon(
+                    Icons.notifications,
+                    color: Colors.white,
+                    size: 30,
+                  ),
+                  Text(
+                    "Subscribe",
+                    style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.white,
+                        fontFamily: AutofillHints.addressCity),
+                  ),
+                ],
+              )),
+        ),
+      ),
+    );
+  }
+}
